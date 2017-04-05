@@ -1,5 +1,7 @@
 package fr.polytech.smtp.server.commands.results;
 
+import fr.polytech.smtp.server.requests.MailDropRequest;
+
 /**
  * This class represents an OK command result.
  *
@@ -18,6 +20,16 @@ public class OkCommandResult extends CommandResult {
 	 */
 	public OkCommandResult() {
 		super(CommandResultStatus.SUCCESS);
+	}
+
+	/**
+	 * Create an OK command result.
+	 * 
+	 * @param mailDropRequest
+	 *            The mail drop request.
+	 */
+	public OkCommandResult(MailDropRequest mailDropRequest) {
+		super(CommandResultStatus.SUCCESS, mailDropRequest);
 	}
 
 	@Override

@@ -1,5 +1,7 @@
 package fr.polytech.smtp.server.commands.results;
 
+import fr.polytech.smtp.server.requests.MailDropRequest;
+
 /**
  * This class represents an invalid command command result.
  *
@@ -18,6 +20,16 @@ public class InvalidCommandCommandResult extends CommandResult {
 	 */
 	public InvalidCommandCommandResult() {
 		super(CommandResultStatus.ERROR);
+	}
+
+	/**
+	 * Create an invalid command command result.
+	 * 
+	 * @param mailDropRequest
+	 *            The mail drop request.
+	 */
+	public InvalidCommandCommandResult(MailDropRequest mailDropRequest) {
+		super(CommandResultStatus.ERROR, mailDropRequest);
 	}
 
 	@Override

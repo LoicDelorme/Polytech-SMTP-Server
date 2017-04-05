@@ -1,5 +1,7 @@
 package fr.polytech.smtp.server.commands.results;
 
+import fr.polytech.smtp.server.requests.MailDropRequest;
+
 /**
  * This class represents a server domain command result.
  *
@@ -18,6 +20,16 @@ public class ServerDomainCommandResult extends CommandResult {
 	 */
 	public ServerDomainCommandResult() {
 		super(CommandResultStatus.SUCCESS);
+	}
+
+	/**
+	 * Create a server domain command result.
+	 * 
+	 * @param mailDropRequest
+	 *            The mail drop request.
+	 */
+	public ServerDomainCommandResult(MailDropRequest mailDropRequest) {
+		super(CommandResultStatus.SUCCESS, mailDropRequest);
 	}
 
 	@Override

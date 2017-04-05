@@ -1,5 +1,7 @@
 package fr.polytech.smtp.server.commands.results;
 
+import fr.polytech.smtp.server.requests.MailDropRequest;
+
 /**
  * This class represents a start mail input command result.
  *
@@ -18,6 +20,16 @@ public class StartMailInputCommandResult extends CommandResult {
 	 */
 	public StartMailInputCommandResult() {
 		super(CommandResultStatus.SUCCESS);
+	}
+
+	/**
+	 * Create a start mail input command result.
+	 * 
+	 * @param mailDropRequest
+	 *            The mail drop request.
+	 */
+	public StartMailInputCommandResult(MailDropRequest mailDropRequest) {
+		super(CommandResultStatus.SUCCESS, mailDropRequest);
 	}
 
 	@Override

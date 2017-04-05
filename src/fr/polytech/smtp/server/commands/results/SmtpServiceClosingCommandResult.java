@@ -1,5 +1,7 @@
 package fr.polytech.smtp.server.commands.results;
 
+import fr.polytech.smtp.server.requests.MailDropRequest;
+
 /**
  * This class represents an SMTP service closing command result.
  *
@@ -18,6 +20,16 @@ public class SmtpServiceClosingCommandResult extends CommandResult {
 	 */
 	public SmtpServiceClosingCommandResult() {
 		super(CommandResultStatus.SUCCESS);
+	}
+
+	/**
+	 * Create an SMTP service closing command result.
+	 * 
+	 * @param mailDropRequest
+	 *            The mail drop request.
+	 */
+	public SmtpServiceClosingCommandResult(MailDropRequest mailDropRequest) {
+		super(CommandResultStatus.SUCCESS, mailDropRequest);
 	}
 
 	@Override

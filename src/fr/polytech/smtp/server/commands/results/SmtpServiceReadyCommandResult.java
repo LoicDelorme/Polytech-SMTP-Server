@@ -1,5 +1,7 @@
 package fr.polytech.smtp.server.commands.results;
 
+import fr.polytech.smtp.server.requests.MailDropRequest;
+
 /**
  * This class represents an SMTP service ready command result.
  *
@@ -18,6 +20,16 @@ public class SmtpServiceReadyCommandResult extends CommandResult {
 	 */
 	public SmtpServiceReadyCommandResult() {
 		super(CommandResultStatus.SUCCESS);
+	}
+
+	/**
+	 * Create an SMTP service ready command result.
+	 * 
+	 * @param mailDropRequest
+	 *            The mail drop request.
+	 */
+	public SmtpServiceReadyCommandResult(MailDropRequest mailDropRequest) {
+		super(CommandResultStatus.SUCCESS, mailDropRequest);
 	}
 
 	@Override

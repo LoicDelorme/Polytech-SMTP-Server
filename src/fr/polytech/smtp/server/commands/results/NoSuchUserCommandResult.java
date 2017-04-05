@@ -1,5 +1,7 @@
 package fr.polytech.smtp.server.commands.results;
 
+import fr.polytech.smtp.server.requests.MailDropRequest;
+
 /**
  * This class represents a no such user command result.
  *
@@ -18,6 +20,16 @@ public class NoSuchUserCommandResult extends CommandResult {
 	 */
 	public NoSuchUserCommandResult() {
 		super(CommandResultStatus.ERROR);
+	}
+
+	/**
+	 * Create a no such user command result.
+	 * 
+	 * @param mailDropRequest
+	 *            The mail drop request.
+	 */
+	public NoSuchUserCommandResult(MailDropRequest mailDropRequest) {
+		super(CommandResultStatus.ERROR, mailDropRequest);
 	}
 
 	@Override
