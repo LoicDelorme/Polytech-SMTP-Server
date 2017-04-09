@@ -19,7 +19,7 @@ public class StartMailInputCommandResult extends CommandResult {
 	 * Create a start mail input command result.
 	 */
 	public StartMailInputCommandResult() {
-		super(CommandResultStatus.SUCCESS);
+		super(CommandResultStatus.SUCCESS, MESSAGE);
 	}
 
 	/**
@@ -29,11 +29,6 @@ public class StartMailInputCommandResult extends CommandResult {
 	 *            The mail drop request.
 	 */
 	public StartMailInputCommandResult(MailDropRequest mailDropRequest) {
-		super(CommandResultStatus.SUCCESS, mailDropRequest);
-	}
-
-	@Override
-	public String toString() {
-		return MESSAGE;
+		super(CommandResultStatus.SUCCESS, MESSAGE, mailDropRequest);
 	}
 }

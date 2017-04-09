@@ -19,7 +19,7 @@ public class InvalidParametersCommandResult extends CommandResult {
 	 * Create an invalid parameter(s) command result.
 	 */
 	public InvalidParametersCommandResult() {
-		super(CommandResultStatus.ERROR);
+		super(CommandResultStatus.ERROR, MESSAGE);
 	}
 
 	/**
@@ -29,11 +29,6 @@ public class InvalidParametersCommandResult extends CommandResult {
 	 *            The mail drop request.
 	 */
 	public InvalidParametersCommandResult(MailDropRequest mailDropRequest) {
-		super(CommandResultStatus.ERROR, mailDropRequest);
-	}
-
-	@Override
-	public String toString() {
-		return MESSAGE;
+		super(CommandResultStatus.ERROR, MESSAGE, mailDropRequest);
 	}
 }

@@ -1,9 +1,17 @@
 package fr.polytech.smtp.server.states;
 
+import java.io.BufferedReader;
 import java.util.HashMap;
 import java.util.Map;
 
 import fr.polytech.smtp.server.commands.Command;
+import fr.polytech.smtp.server.commands.DATA;
+import fr.polytech.smtp.server.commands.EHLO;
+import fr.polytech.smtp.server.commands.MAILFROM;
+import fr.polytech.smtp.server.commands.QUIT;
+import fr.polytech.smtp.server.commands.RCPTTO;
+import fr.polytech.smtp.server.commands.RSET;
+import fr.polytech.smtp.server.requests.MailDropRequest;
 import fr.polytech.smtp.server.states.results.StateResult;
 
 /**
@@ -20,42 +28,44 @@ public abstract class State {
 	protected static final Map<String, Command> COMMANDS = new HashMap<String, Command>();
 
 	{
-		COMMANDS.put(null, null);
+		COMMANDS.put(DATA.COMMAND_NAME, new DATA());
+		COMMANDS.put(EHLO.COMMAND_NAME, new EHLO());
+		COMMANDS.put(MAILFROM.COMMAND_NAME, new MAILFROM());
+		COMMANDS.put(QUIT.COMMAND_NAME, new QUIT());
+		COMMANDS.put(RCPTTO.COMMAND_NAME, new RCPTTO());
+		COMMANDS.put(RSET.COMMAND_NAME, new RSET());
 	}
+
+	/**
+	 * The mail drop request.
+	 */
+	protected final MailDropRequest mailDropRequest;
 
 	/**
 	 * Create a state.
 	 */
 	public State() {
+		this(null);
 	}
 
 	/**
-	 * Run the command.
+	 * Create a state.
 	 * 
-	 * @param receivedCommand
-	 *            The received command with its potential parameters.
-	 * @return The state result.
+	 * @param mailDropRequest
+	 *            The mail drop request.
 	 */
-	public StateResult runCommand(String receivedCommand) {
-		final String[] splittedCommand = receivedCommand.split(" ");
-
-		final String command = splittedCommand[0].toUpperCase();
-		final String[] parameters = new String[splittedCommand.length - 1];
-		if (splittedCommand.length > 1) {
-			System.arraycopy(splittedCommand, 1, parameters, 0, parameters.length);
-		}
-
-		return executeCommand(command, parameters);
+	public State(MailDropRequest mailDropRequest) {
+		this.mailDropRequest = mailDropRequest;
 	}
 
 	/**
 	 * Execute the command with its parameters.
 	 * 
-	 * @param command
-	 *            The command.
-	 * @param parameters
-	 *            The parameters (optionnal).
+	 * @param receivedCommand
+	 *            The received command.
+	 * @param inputStream
+	 *            The input stream.
 	 * @return The state result.
 	 */
-	protected abstract StateResult executeCommand(String command, String[] parameters);
+	public abstract StateResult executeCommand(String receivedCommand, BufferedReader inputStream);
 }

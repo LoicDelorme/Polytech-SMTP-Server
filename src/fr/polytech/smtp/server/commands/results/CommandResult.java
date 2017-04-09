@@ -8,12 +8,17 @@ import fr.polytech.smtp.server.requests.MailDropRequest;
  * @author DELORME Loïc
  * @since 1.0.0
  */
-public abstract class CommandResult {
+public class CommandResult {
 
 	/**
 	 * The command result status.
 	 */
 	private final CommandResultStatus status;
+
+	/**
+	 * The message.
+	 */
+	private final String message;
 
 	/**
 	 * The mail drop request.
@@ -25,9 +30,11 @@ public abstract class CommandResult {
 	 * 
 	 * @param status
 	 *            The command result status.
+	 * @param message
+	 *            The message.
 	 */
-	public CommandResult(CommandResultStatus status) {
-		this(status, null);
+	public CommandResult(CommandResultStatus status, String message) {
+		this(status, message, null);
 	}
 
 	/**
@@ -35,11 +42,14 @@ public abstract class CommandResult {
 	 * 
 	 * @param status
 	 *            The command result status.
+	 * @param message
+	 *            The message.
 	 * @param mailDropRequest
 	 *            The mail drop request.
 	 */
-	public CommandResult(CommandResultStatus status, MailDropRequest mailDropRequest) {
+	public CommandResult(CommandResultStatus status, String message, MailDropRequest mailDropRequest) {
 		this.status = status;
+		this.message = message;
 		this.mailDropRequest = mailDropRequest;
 	}
 
@@ -62,5 +72,7 @@ public abstract class CommandResult {
 	}
 
 	@Override
-	public abstract String toString();
+	public String toString() {
+		return this.message;
+	}
 }

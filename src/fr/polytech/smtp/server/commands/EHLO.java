@@ -1,5 +1,8 @@
 package fr.polytech.smtp.server.commands;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import fr.polytech.smtp.server.commands.results.CommandResult;
 import fr.polytech.smtp.server.commands.results.InvalidParametersCommandResult;
 import fr.polytech.smtp.server.commands.results.ServerDomainCommandResult;
@@ -19,6 +22,11 @@ public class EHLO extends Command {
 	public static final String COMMAND_NAME = "EHLO";
 
 	/**
+	 * The command pattern.
+	 */
+	public static final Pattern COMMAND_PATTERN = Pattern.compile("EHLO (.*)");
+
+	/**
 	 * Create an EHLO SMTP command.
 	 */
 	public EHLO() {
@@ -26,13 +34,19 @@ public class EHLO extends Command {
 	}
 
 	@Override
-	public CommandResult execute(MailDropRequest mailDropRequest, String[] parameters) {
-		if (parameters.length != 1) {
+	public CommandResult execute(MailDropRequest mailDropRequest, String receivedCommand) {
+		final Matcher matcher = COMMAND_PATTERN.matcher(receivedCommand);
+		if (!matcher.find()) {
+			return new InvalidParametersCommandResult();
+		}
+
+		final String serverDomain = matcher.group(1);
+		if (serverDomain.isEmpty()) {
 			return new InvalidParametersCommandResult();
 		}
 
 		final MailDropRequest newMailDropRequest = new MailDropRequest();
-		newMailDropRequest.setEmitterServerDomain(parameters[0]);
+		newMailDropRequest.setEmitterServerDomain(serverDomain);
 
 		return new ServerDomainCommandResult(newMailDropRequest);
 	}

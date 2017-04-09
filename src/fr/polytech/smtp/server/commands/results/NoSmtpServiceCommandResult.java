@@ -19,7 +19,7 @@ public class NoSmtpServiceCommandResult extends CommandResult {
 	 * Create a no SMTP service command result.
 	 */
 	public NoSmtpServiceCommandResult() {
-		super(CommandResultStatus.ERROR);
+		super(CommandResultStatus.ERROR, MESSAGE);
 	}
 
 	/**
@@ -29,11 +29,6 @@ public class NoSmtpServiceCommandResult extends CommandResult {
 	 *            The mail drop request.
 	 */
 	public NoSmtpServiceCommandResult(MailDropRequest mailDropRequest) {
-		super(CommandResultStatus.ERROR, mailDropRequest);
-	}
-
-	@Override
-	public String toString() {
-		return MESSAGE;
+		super(CommandResultStatus.ERROR, MESSAGE, mailDropRequest);
 	}
 }

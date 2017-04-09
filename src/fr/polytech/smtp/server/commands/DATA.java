@@ -1,8 +1,7 @@
 package fr.polytech.smtp.server.commands;
 
 import fr.polytech.smtp.server.commands.results.CommandResult;
-import fr.polytech.smtp.server.commands.results.InvalidParametersCommandResult;
-import fr.polytech.smtp.server.commands.results.OkCommandResult;
+import fr.polytech.smtp.server.commands.results.StartMailInputCommandResult;
 import fr.polytech.smtp.server.requests.MailDropRequest;
 
 /**
@@ -26,13 +25,7 @@ public class DATA extends Command {
 	}
 
 	@Override
-	public CommandResult execute(MailDropRequest mailDropRequest, String[] parameters) {
-		if (parameters.length != 1) {
-			return new InvalidParametersCommandResult();
-		}
-
-		mailDropRequest.appendEmailContent(parameters[0]);
-
-		return new OkCommandResult();
+	public CommandResult execute(MailDropRequest mailDropRequest, String receivedCommand) {
+		return new StartMailInputCommandResult(mailDropRequest);
 	}
 }

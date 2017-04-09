@@ -4,7 +4,7 @@ import fr.polytech.smtp.server.commands.results.CommandResult;
 import fr.polytech.smtp.server.requests.MailDropRequest;
 
 /**
- * This class represents a POP 3 command.
+ * This class represents an SMTP command.
  *
  * @author DELORME Loïc
  * @since 1.0.0
@@ -17,7 +17,7 @@ public abstract class Command {
 	protected final String name;
 
 	/**
-	 * Create a POP 3 command.
+	 * Create an SMTP command.
 	 * 
 	 * @param name
 	 *            The command name.
@@ -36,15 +36,15 @@ public abstract class Command {
 	}
 
 	/**
-	 * Execute the POP 3 command.
+	 * Execute the SMTP command.
 	 * 
 	 * @param mailDropRequest
 	 *            The mail drop request (optionnal).
-	 * @param parameters
-	 *            The parameters (optionnal).
+	 * @param receivedCommand
+	 *            The received command.
 	 * @return The command result.
 	 */
-	public abstract CommandResult execute(MailDropRequest mailDropRequest, String[] parameters);
+	public abstract CommandResult execute(MailDropRequest mailDropRequest, String receivedCommand);
 
 	@Override
 	public String toString() {

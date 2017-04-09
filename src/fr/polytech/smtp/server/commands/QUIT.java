@@ -25,7 +25,7 @@ public class QUIT extends Command {
 	}
 
 	@Override
-	public CommandResult execute(MailDropRequest mailDropRequest, String[] parameters) {
+	public CommandResult execute(MailDropRequest mailDropRequest, String receivedCommand) {
 		return new SmtpServiceClosingCommandResult();
 	}
 }

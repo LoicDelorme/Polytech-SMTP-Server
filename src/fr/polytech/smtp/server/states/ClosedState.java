@@ -1,5 +1,7 @@
 package fr.polytech.smtp.server.states;
 
+import java.io.BufferedReader;
+
 import fr.polytech.smtp.server.commands.results.SmtpServiceReadyCommandResult;
 import fr.polytech.smtp.server.states.results.StateResult;
 
@@ -19,7 +21,7 @@ public class ClosedState extends State {
 	}
 
 	@Override
-	protected StateResult executeCommand(String command, String[] parameters) {
+	public StateResult executeCommand(String receivedCommand, BufferedReader inputStream) {
 		return new StateResult(new SmtpServiceReadyCommandResult().toString(), new WaitingForAuthentificationState());
 	}
 }

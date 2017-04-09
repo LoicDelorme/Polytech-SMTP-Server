@@ -19,7 +19,7 @@ public class ServerDomainCommandResult extends CommandResult {
 	 * Create a server domain command result.
 	 */
 	public ServerDomainCommandResult() {
-		super(CommandResultStatus.SUCCESS);
+		super(CommandResultStatus.SUCCESS, MESSAGE);
 	}
 
 	/**
@@ -29,11 +29,6 @@ public class ServerDomainCommandResult extends CommandResult {
 	 *            The mail drop request.
 	 */
 	public ServerDomainCommandResult(MailDropRequest mailDropRequest) {
-		super(CommandResultStatus.SUCCESS, mailDropRequest);
-	}
-
-	@Override
-	public String toString() {
-		return MESSAGE;
+		super(CommandResultStatus.SUCCESS, MESSAGE, mailDropRequest);
 	}
 }

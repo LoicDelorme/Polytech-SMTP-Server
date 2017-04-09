@@ -1,5 +1,8 @@
 package fr.polytech.smtp.server.commands;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import fr.polytech.smtp.server.commands.results.CommandResult;
 import fr.polytech.smtp.server.commands.results.InvalidParametersCommandResult;
 import fr.polytech.smtp.server.commands.results.OkCommandResult;
@@ -16,7 +19,12 @@ public class MAILFROM extends Command {
 	/**
 	 * The command name.
 	 */
-	public static final String COMMAND_NAME = "MAIL FROM:";
+	public static final String COMMAND_NAME = "MAIL FROM";
+
+	/**
+	 * The command pattern.
+	 */
+	public static final Pattern COMMAND_PATTERN = Pattern.compile("MAIL FROM <(.*)>");
 
 	/**
 	 * Create a MAIL FROM SMTP command.
@@ -26,13 +34,18 @@ public class MAILFROM extends Command {
 	}
 
 	@Override
-	public CommandResult execute(MailDropRequest mailDropRequest, String[] parameters) {
-		if (parameters.length != 1) {
+	public CommandResult execute(MailDropRequest mailDropRequest, String receivedCommand) {
+		final Matcher matcher = COMMAND_PATTERN.matcher(receivedCommand);
+		if (!matcher.find()) {
 			return new InvalidParametersCommandResult();
 		}
 
-		mailDropRequest.setEmitterEmailAddress(parameters[0]);
+		final String emitterEmailAddress = matcher.group(1);
+		if (emitterEmailAddress.isEmpty()) {
+			return new InvalidParametersCommandResult();
+		}
 
+		mailDropRequest.setEmitterEmailAddress(emitterEmailAddress);
 		return new OkCommandResult(mailDropRequest);
 	}
 }

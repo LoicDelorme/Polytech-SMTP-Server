@@ -19,7 +19,7 @@ public class SmtpServiceReadyCommandResult extends CommandResult {
 	 * Create an SMTP service ready command result.
 	 */
 	public SmtpServiceReadyCommandResult() {
-		super(CommandResultStatus.SUCCESS);
+		super(CommandResultStatus.SUCCESS, MESSAGE);
 	}
 
 	/**
@@ -29,11 +29,6 @@ public class SmtpServiceReadyCommandResult extends CommandResult {
 	 *            The mail drop request.
 	 */
 	public SmtpServiceReadyCommandResult(MailDropRequest mailDropRequest) {
-		super(CommandResultStatus.SUCCESS, mailDropRequest);
-	}
-
-	@Override
-	public String toString() {
-		return MESSAGE;
+		super(CommandResultStatus.SUCCESS, MESSAGE, mailDropRequest);
 	}
 }

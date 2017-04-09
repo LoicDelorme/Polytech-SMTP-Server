@@ -19,7 +19,7 @@ public class NoSuchUserCommandResult extends CommandResult {
 	 * Create a no such user command result.
 	 */
 	public NoSuchUserCommandResult() {
-		super(CommandResultStatus.ERROR);
+		super(CommandResultStatus.ERROR, MESSAGE);
 	}
 
 	/**
@@ -29,11 +29,6 @@ public class NoSuchUserCommandResult extends CommandResult {
 	 *            The mail drop request.
 	 */
 	public NoSuchUserCommandResult(MailDropRequest mailDropRequest) {
-		super(CommandResultStatus.ERROR, mailDropRequest);
-	}
-
-	@Override
-	public String toString() {
-		return MESSAGE;
+		super(CommandResultStatus.ERROR, MESSAGE, mailDropRequest);
 	}
 }

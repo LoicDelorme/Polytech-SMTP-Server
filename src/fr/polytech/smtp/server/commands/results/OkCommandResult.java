@@ -19,7 +19,7 @@ public class OkCommandResult extends CommandResult {
 	 * Create an OK command result.
 	 */
 	public OkCommandResult() {
-		super(CommandResultStatus.SUCCESS);
+		super(CommandResultStatus.SUCCESS, MESSAGE);
 	}
 
 	/**
@@ -29,11 +29,6 @@ public class OkCommandResult extends CommandResult {
 	 *            The mail drop request.
 	 */
 	public OkCommandResult(MailDropRequest mailDropRequest) {
-		super(CommandResultStatus.SUCCESS, mailDropRequest);
-	}
-
-	@Override
-	public String toString() {
-		return MESSAGE;
+		super(CommandResultStatus.SUCCESS, MESSAGE, mailDropRequest);
 	}
 }
