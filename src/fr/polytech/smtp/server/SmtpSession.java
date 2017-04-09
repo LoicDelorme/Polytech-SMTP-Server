@@ -58,7 +58,6 @@ public class SmtpSession implements Runnable {
 				commandOutput = stateResult.getMessage();
 
 				outputStream.writeBytes(commandOutput + "\r\n");
-				// outputStream.writeBytes("\r\n");
 				LOGGER.log(Level.INFO, "[SERVER_THREAD] commandOutput:" + commandOutput);
 
 				if (currentState == null) {

@@ -46,10 +46,12 @@ public class WaitingForDataState extends State {
 
 		try {
 			this.mailDropRequest.appendEmailContent(receivedCommand);
+			this.mailDropRequest.appendEmailContent("\r\n");
 
 			String readLine = inputStream.readLine();
 			while (!EMAIL_END_CHARACTER.equals(readLine)) {
 				this.mailDropRequest.appendEmailContent(readLine);
+				this.mailDropRequest.appendEmailContent("\r\n");
 				readLine = inputStream.readLine();
 			}
 
@@ -73,9 +75,10 @@ public class WaitingForDataState extends State {
 	 */
 	private void writeEmails() throws IOException {
 		final String content = this.mailDropRequest.getEmailContent();
+
 		File email = null;
 		for (String recipient : this.mailDropRequest.getRecipientsEmailAdresses()) {
-			email = new File(INBOXES_PATH + recipient + UUID.randomUUID().toString());
+			email = new File(INBOXES_PATH + recipient + File.separator + UUID.randomUUID().toString());
 			Files.write(email.toPath(), content.getBytes(), StandardOpenOption.CREATE_NEW);
 		}
 	}
