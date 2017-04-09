@@ -13,7 +13,7 @@ public class StartMailInputCommandResult extends CommandResult {
 	/**
 	 * The message.
 	 */
-	private static final String MESSAGE = "354 Start Mail input; end with \r\n.\r\n";
+	private static final String MESSAGE = "354 Start Mail input; end with \r\n..\r\n";
 
 	/**
 	 * Create a start mail input command result.
