@@ -1,5 +1,6 @@
 package fr.polytech.smtp.server.commands.results;
 
+import fr.polytech.smtp.server.SmtpServer;
 import fr.polytech.smtp.server.requests.MailDropRequest;
 
 /**
@@ -13,7 +14,7 @@ public class ServerDomainCommandResult extends CommandResult {
 	/**
 	 * The message.
 	 */
-	private static final String MESSAGE = "250 polytech.fr";
+	private static final String MESSAGE = String.format("250 %s", SmtpServer.SERVER_DOMAIN);
 
 	/**
 	 * Create a server domain command result.

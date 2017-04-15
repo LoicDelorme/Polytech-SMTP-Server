@@ -1,5 +1,6 @@
 package fr.polytech.smtp.server.commands.results;
 
+import fr.polytech.smtp.server.SmtpServer;
 import fr.polytech.smtp.server.requests.MailDropRequest;
 
 /**
@@ -13,7 +14,7 @@ public class SmtpServiceReadyCommandResult extends CommandResult {
 	/**
 	 * The message.
 	 */
-	private static final String MESSAGE = "220 polytech.fr Simple Mail Transfer Service Ready";
+	private static final String MESSAGE = String.format("220 %s Simple Mail Transfer Service Ready", SmtpServer.SERVER_DOMAIN);
 
 	/**
 	 * Create an SMTP service ready command result.

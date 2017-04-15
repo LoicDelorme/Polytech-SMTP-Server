@@ -1,5 +1,6 @@
 package fr.polytech.smtp.server.commands.results;
 
+import fr.polytech.smtp.server.SmtpServer;
 import fr.polytech.smtp.server.requests.MailDropRequest;
 
 /**
@@ -13,7 +14,7 @@ public class SmtpServiceClosingCommandResult extends CommandResult {
 	/**
 	 * The message.
 	 */
-	private static final String MESSAGE = "221 polytech.fr Service closing transmission channel";
+	private static final String MESSAGE = String.format("221 %s Service Closing Transmission Channel", SmtpServer.SERVER_DOMAIN);
 
 	/**
 	 * Create an SMTP service closing command result.
