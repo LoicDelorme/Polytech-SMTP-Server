@@ -28,7 +28,7 @@ public class RCPTTO extends Command {
 	/**
 	 * The inboxes path.
 	 */
-	private static final String INBOXES_PATH = "inboxes" + File.separator;
+	public static final String INBOXES_PATH = "inboxes" + File.separator;
 
 	/**
 	 * The command name.

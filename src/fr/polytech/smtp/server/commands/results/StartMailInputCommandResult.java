@@ -1,5 +1,6 @@
 package fr.polytech.smtp.server.commands.results;
 
+import fr.polytech.smtp.server.SmtpServer;
 import fr.polytech.smtp.server.requests.MailDropRequest;
 
 /**
@@ -13,7 +14,7 @@ public class StartMailInputCommandResult extends CommandResult {
 	/**
 	 * The message.
 	 */
-	private static final String MESSAGE = "354 Start Mail input; end with \r\n..\r\n";
+	private static final String MESSAGE = String.format("354 Start Mail input; end with \r\n%s\r\n", SmtpServer.SERVER_EMAIL_END_CHARACTER);
 
 	/**
 	 * Create a start mail input command result.

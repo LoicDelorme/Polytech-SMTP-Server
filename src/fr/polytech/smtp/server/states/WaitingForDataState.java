@@ -7,6 +7,8 @@ import java.nio.file.Files;
 import java.nio.file.StandardOpenOption;
 import java.util.UUID;
 
+import fr.polytech.smtp.server.SmtpServer;
+import fr.polytech.smtp.server.commands.RCPTTO;
 import fr.polytech.smtp.server.commands.results.OkCommandResult;
 import fr.polytech.smtp.server.requests.MailDropRequest;
 import fr.polytech.smtp.server.states.results.StateResult;
@@ -18,16 +20,6 @@ import fr.polytech.smtp.server.states.results.StateResult;
  * @since 1.0.0
  */
 public class WaitingForDataState extends State {
-
-	/**
-	 * The inboxes path.
-	 */
-	private static final String INBOXES_PATH = "inboxes" + File.separator;
-
-	/**
-	 * The email end character.
-	 */
-	private static final String EMAIL_END_CHARACTER = "..";
 
 	/**
 	 * Create a waiting for data state.
@@ -45,16 +37,15 @@ public class WaitingForDataState extends State {
 		State nextState = null;
 
 		try {
-			this.mailDropRequest.appendEmailContent(receivedCommand);
-			this.mailDropRequest.appendEmailContent("\r\n");
-
-			String readLine = inputStream.readLine();
-			while (!EMAIL_END_CHARACTER.equals(readLine)) {
+			// Recover data.
+			String readLine = receivedCommand;
+			while (!SmtpServer.SERVER_EMAIL_END_CHARACTER.equals(readLine)) {
 				this.mailDropRequest.appendEmailContent(readLine);
 				this.mailDropRequest.appendEmailContent("\r\n");
 				readLine = inputStream.readLine();
 			}
 
+			// Write data.
 			writeEmails();
 
 			message = new OkCommandResult().toString();
@@ -74,12 +65,10 @@ public class WaitingForDataState extends State {
 	 *             If an error occurs.
 	 */
 	private void writeEmails() throws IOException {
-		final String content = this.mailDropRequest.getEmailContent();
-
 		File email = null;
 		for (String recipient : this.mailDropRequest.getRecipientsEmailAdresses()) {
-			email = new File(INBOXES_PATH + recipient + File.separator + UUID.randomUUID().toString());
-			Files.write(email.toPath(), content.getBytes(), StandardOpenOption.CREATE_NEW);
+			email = new File(RCPTTO.INBOXES_PATH + recipient + File.separator + UUID.randomUUID().toString());
+			Files.write(email.toPath(), this.mailDropRequest.getEmailContent().getBytes(), StandardOpenOption.CREATE_NEW);
 		}
 	}
 }
