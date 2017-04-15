@@ -14,7 +14,7 @@ public class StartMailInputCommandResult extends CommandResult {
 	/**
 	 * The message.
 	 */
-	private static final String MESSAGE = String.format("354 Start Mail input; end with \r\n%s\r\n", SmtpServer.SERVER_EMAIL_END_CHARACTER);
+	private static final String MESSAGE = String.format("354 Start Mail input; end with \r\n%s", SmtpServer.SERVER_EMAIL_END_CHARACTER);
 
 	/**
 	 * Create a start mail input command result.
