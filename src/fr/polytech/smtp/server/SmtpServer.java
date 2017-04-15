@@ -1,12 +1,10 @@
 package fr.polytech.smtp.server;
 
 import java.io.IOException;
+import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import javax.net.ssl.SSLServerSocket;
-import javax.net.ssl.SSLServerSocketFactory;
 
 /**
  * This class represents an SMTP server.
@@ -15,6 +13,16 @@ import javax.net.ssl.SSLServerSocketFactory;
  * @since 1.0.0
  */
 public class SmtpServer implements Runnable {
+
+	/**
+	 * The server domain.
+	 */
+	public static final String SERVER_DOMAIN = "polytech.fr";
+
+	/**
+	 * The server email end character.
+	 */
+	public static final String SERVER_EMAIL_END_CHARACTER = "..";
 
 	/**
 	 * The server port.
@@ -33,11 +41,7 @@ public class SmtpServer implements Runnable {
 
 	@Override
 	public void run() {
-		final SSLServerSocketFactory sslServerSocketFactory = (SSLServerSocketFactory) SSLServerSocketFactory.getDefault();
-
-		try (final SSLServerSocket serverSocket = (SSLServerSocket) sslServerSocketFactory.createServerSocket(SERVER_PORT, SERVER_QUEUE_LENGHT)) {
-			serverSocket.setEnabledCipherSuites(sslServerSocketFactory.getSupportedCipherSuites());
-
+		try (final ServerSocket serverSocket = new ServerSocket(SERVER_PORT, SERVER_QUEUE_LENGHT)) {
 			Socket client = null;
 			while (true) {
 				client = serverSocket.accept();
