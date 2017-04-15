@@ -58,14 +58,14 @@ public class SmtpSession implements Runnable {
 				commandOutput = stateResult.getMessage();
 
 				outputStream.writeBytes(commandOutput + "\r\n");
-				LOGGER.log(Level.INFO, "[SERVER_THREAD] commandOutput:" + commandOutput);
+				LOGGER.log(Level.INFO, "[SERVER_THREAD] commandOutput: " + commandOutput);
 
 				if (currentState == null) {
 					break;
 				}
 
 				commandInput = inputStream.readLine();
-				LOGGER.log(Level.INFO, "[SERVER_THREAD] commandInput:" + commandInput);
+				LOGGER.log(Level.INFO, "[SERVER_THREAD] commandInput: " + commandInput);
 			}
 
 			this.socket.close();
