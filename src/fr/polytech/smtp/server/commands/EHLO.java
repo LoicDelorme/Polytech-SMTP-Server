@@ -1,5 +1,7 @@
 package fr.polytech.smtp.server.commands;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -15,6 +17,11 @@ import fr.polytech.smtp.server.requests.MailDropRequest;
  * @since 1.0.0
  */
 public class EHLO extends Command {
+
+	/**
+	 * The logger.
+	 */
+	private static final Logger LOGGER = Logger.getLogger(EHLO.class.getName());
 
 	/**
 	 * The command name.
@@ -45,9 +52,8 @@ public class EHLO extends Command {
 			return new InvalidParametersCommandResult();
 		}
 
-		final MailDropRequest newMailDropRequest = new MailDropRequest();
-		newMailDropRequest.setEmitterServerDomain(serverDomain);
+		LOGGER.log(Level.INFO, "[SERVER] New mail drop request from " + serverDomain);
 
-		return new ServerDomainCommandResult(newMailDropRequest);
+		return new ServerDomainCommandResult(new MailDropRequest());
 	}
 }

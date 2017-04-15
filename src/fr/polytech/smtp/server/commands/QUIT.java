@@ -1,5 +1,8 @@
 package fr.polytech.smtp.server.commands;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import fr.polytech.smtp.server.commands.results.CommandResult;
 import fr.polytech.smtp.server.commands.results.SmtpServiceClosingCommandResult;
 import fr.polytech.smtp.server.requests.MailDropRequest;
@@ -11,6 +14,11 @@ import fr.polytech.smtp.server.requests.MailDropRequest;
  * @since 1.0.0
  */
 public class QUIT extends Command {
+
+	/**
+	 * The logger.
+	 */
+	private static final Logger LOGGER = Logger.getLogger(QUIT.class.getName());
 
 	/**
 	 * The command name.
@@ -26,6 +34,7 @@ public class QUIT extends Command {
 
 	@Override
 	public CommandResult execute(MailDropRequest mailDropRequest, String receivedCommand) {
+		LOGGER.log(Level.INFO, "[SERVER] Connection will be closed");
 		return new SmtpServiceClosingCommandResult();
 	}
 }

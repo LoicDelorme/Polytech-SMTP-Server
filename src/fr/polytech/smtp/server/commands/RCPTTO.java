@@ -1,6 +1,8 @@
 package fr.polytech.smtp.server.commands;
 
 import java.io.File;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -11,12 +13,17 @@ import fr.polytech.smtp.server.commands.results.OkCommandResult;
 import fr.polytech.smtp.server.requests.MailDropRequest;
 
 /**
- * This class represents an RCPT TO SMTP command.
+ * This class represents a RCPT TO SMTP command.
  *
  * @author DELORME Loïc
  * @since 1.0.0
  */
 public class RCPTTO extends Command {
+
+	/**
+	 * The logger.
+	 */
+	private static final Logger LOGGER = Logger.getLogger(RCPTTO.class.getName());
 
 	/**
 	 * The inboxes path.
@@ -55,6 +62,8 @@ public class RCPTTO extends Command {
 		final String recipient = recipientEmailAddress.split("@")[0];
 		if (recipientExists(recipient)) {
 			mailDropRequest.addRecipientEmailAdress(recipient);
+			LOGGER.log(Level.INFO, "[SERVER] New recipient email address: " + recipient);
+
 			return new OkCommandResult(mailDropRequest);
 		}
 
