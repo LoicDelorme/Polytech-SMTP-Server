@@ -12,11 +12,6 @@ import java.util.List;
 public class MailDropRequest {
 
 	/**
-	 * The emitter server domain.
-	 */
-	private String emitterServerDomain;
-
-	/**
 	 * The emitter email address.
 	 */
 	private String emitterEmailAddress;
@@ -35,29 +30,9 @@ public class MailDropRequest {
 	 * Create an SMTP mail drop request.
 	 */
 	public MailDropRequest() {
-		this.emitterServerDomain = null;
 		this.emitterEmailAddress = null;
 		this.recipientsEmailAdresses = new ArrayList<String>();
 		this.emailContent = new StringBuilder();
-	}
-
-	/**
-	 * Get the emitter server domain.
-	 * 
-	 * @return The emitter server domain.
-	 */
-	public String getEmitterServerDomain() {
-		return this.emitterServerDomain;
-	}
-
-	/**
-	 * Set the emitter server domain.
-	 * 
-	 * @param emitterServerDomain
-	 *            The emitter server domain.
-	 */
-	public void setEmitterServerDomain(String emitterServerDomain) {
-		this.emitterServerDomain = emitterServerDomain;
 	}
 
 	/**
